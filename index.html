@@ -1,53 +1,148 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>康文昌的在线HTML 教学小工具</title>
-    <style>  
-      body {
-        margin: 0;
-      }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>box2</title>
   </head>
+  <style>
+    * {
+      margin: 8px;
+      border-sizing: border-box;
+      padding: 0px;
+    }
+    .top {
+      display: flex;
+      background-color: lightblue;
+      color: white;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 20px;
+      text-align: center;
+    }
+    .introduce {
+      display: flex;
+      background-color: white;
+      color: #000;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      text-align: center;
+      font-size: 30px;
+    }
+    .skill {
+      display: flex;
+      background-color: lightgrey;
+      color: #000;
+      flex-direction: column;
+      font-size: 20px;
+    }
+    .skill_1 {
+      display: flex;
+      background-color: grey;
+      height: 18px;
+    }
+    .skill_1_1 {
+      display: flex;
+      background-color: chartreuse;
+      height: 18px;
+      justify-self: start;
+      margin: 0px;
+    }
+    .xiangmu {
+      font-size: 20px;
+    }
+    .xiangmucolor {
+      display: inline-block;
+      background-color: chartreuse;
+    }
+    .bottom {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: blue;
+      color: white;
+      height: 80px;
+    }
+  </style>
   <body>
-    <div 
-    style="
-    background-color:#B2DFEE;
-    text-align:center;
-  
+    <!-- 顶部区域 -->
+    <div class="top">
+      <div>
+        <img
+          src="https://www.helloimg.com/i/2024/11/28/674821868cc42.png"
+          alt="touxiang"
+          width="100px"
+          height="
+        100px"
+        />
+      </div>
+      <div>
+        <div><p>野原晨之助</p></div>
+        <div><p>qiu老婆师</p></div>
+      </div>
+    </div>
+    <!-- 个人简介区域 -->
+    <div>
+      <!-- 简介区域 -->
 
-    ">
-      <h1>开始的倾心交谈</h1>
-    <p style='font-size:20px'>沦为平淡</p>
-    </div>
-    
-    <div style="background-color:#FFE4B5;
-    margin:50px auto;
-    padding:10px
-    
-    ">
-      <p style="text-align:center;">望眼欲穿</p>
-      <p style="text-align:center;">望眼欲穿</p>
-      <p style="text-align:center;">望眼欲穿</p>
-      <p style="text-align:center;">望眼欲穿</p>
-      <p style="text-align:center;">望眼欲穿</p>
-      <p style="text-align:center;">望眼欲穿</p>
-      <p style="text-align:center;">望眼欲穿</p>
-      <p style="text-align:center;">望眼欲穿</p>
-      <p style="text-align:center;">望眼欲穿</p>
-      <p style="text-align:center;">望眼欲穿</p>
-    </div>
-    
-    <div style ='background-color:#E6E6FA;
-    text-align:center;
-    '
-    
+      <div class="introduce">
+        <div><p>简介：</p></div>
+        <p>
+          我是一名有激情的qiu老婆师，喜欢学习新的qiu老婆技术，致力于提升自己的qiu老婆技术水平。
+        </p>
+      </div>
 
-    >
-      <h1>等不到你的晚安</h1>
-      <p style='font-size:20px'>全都 与我无关</p>
+      <!-- 技能区域 -->
+      <div class="skill">
+        <div style="font-weight: bold; font-size: 30px">技能</div>
+        <div>
+          <div>达皮 90%</div>
+          <div class="skill_1">
+            <div class="skill_1_1" style="width: 90%"></div>
+          </div>
+        </div>
+        <div>
+          <div>弄肉 88%</div>
+          <div class="skill_1">
+            <div class="skill_1_1" style="width: 88%"></div>
+          </div>
+        </div>
+        <div>
+          <div>挠脚底 70%</div>
+          <div class="skill_1">
+            <div class="skill_1_1" style="width: 70%"></div>
+          </div>
+        </div>
+      </div>
     </div>
-    
+    <!-- 项目经历区域 -->
+    <div class="xiangmu">
+      <div style="font-weight: bold; font-size: 30px">项目经历</div>
+      <div>
+        <div class="xiangmucolor">
+          <a href="https://example.com/project1" target="_blank">疯狂达皮</a>
+        </div>
+        <div>疯狂达肉皮1238下。</div>
+      </div>
+      <div>
+        <div class="xiangmucolor">
+          <a href="https://example.com/project2" target="_blank">啃噬肥肉</a>
+        </div>
+        <div>疯狂啃噬老婆肉。</div>
+      </div>
+      <div>
+        <div class="xiangmucolor">
+          <a href="https://example.com/project3" target="_blank">疯狂挠jio</a>
+        </div>
+        <div>用劲挠老婆脚底板，还不让她动。</div>
+      </div>
+    </div>
+    <!-- 底部区域 -->
+    <div class="bottom">
+      <div>邮箱：xiaoxin@example.com</div>
+      <div>电话：123-456-7890</div>
+    </div>
   </body>
 </html>
