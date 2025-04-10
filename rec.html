@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket 接收端</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background: #0f0f23;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .status {
+            position: fixed;
+            top: 20px;
+            font-size: 18px;
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            z-index: 100;
+        }
+        
+        .message {
+            position: absolute;
+            font-size: 28px;
+            font-weight: bold;
+            white-space: nowrap;
+            animation: floatUp 6s ease-out forwards;
+            opacity: 0;
+            text-shadow: 0 0 10px currentColor;
+            transform: translateY(0);
+        }
+        
+        @keyframes floatUp {
+            0% {
+                opacity: 0;
+                transform: translateY(100px) scale(0.8);
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(1.2);
+            }
+        }
+        
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="status" id="status">正在连接 WebSocket...</div>
+
+    <script>
+        const statusDiv = document.getElementById('status');
+        let socket = null;
+        
+        // 霓虹色系
+        const neonColors = [
+            '#ff2d75', '#ff2d75', // 粉红
+            '#00f2fe', '#00f2fe', // 青蓝
+            '#f5d742', '#f5d742', // 金黄
+            '#a162e8', '#a162e8', // 紫色
+            '#0ff0fc', '#0ff0fc', // 亮蓝
+            '#f148fb', '#f148fb', // 亮紫
+            '#ff00aa', '#ff00aa', // 玫红
+            '#00ffaa', '#00ffaa'  // 亮绿
+        ];
+        
+        // 页面加载时自动连接 WebSocket
+        window.addEventListener('load', () => {
+            connectWebSocket();
+        });
+        
+        function connectWebSocket() {
+            socket = new WebSocket('ws://192.168.1.115:8080/pet/ws');
+            
+            socket.onopen = (event) => {
+                statusDiv.textContent = "✅ 已连接";
+                statusDiv.style.color = "#00ffaa";
+            };
+            
+            socket.onmessage = (event) => {
+                showMessage(event.data);
+                createParticles();
+            };
+            
+            socket.onclose = (event) => {
+                statusDiv.textContent = "❌ WebSocket 连接已断开";
+                statusDiv.style.color = "#ff2d75";
+                setTimeout(connectWebSocket, 3000);
+            };
+            
+            socket.onerror = (error) => {
+                statusDiv.textContent = "❌ WebSocket 连接错误";
+                statusDiv.style.color = "#ff2d75";
+            };
+        }
+        
+        function showMessage(text) {
+            const message = document.createElement('div');
+            message.className = 'message';
+            message.textContent = text;
+            
+            // 随机霓虹色
+            const color = neonColors[Math.floor(Math.random() * neonColors.length)];
+            message.style.color = color;
+            
+            // 随机水平位置 (20%-80%)
+            const left = 20 + Math.random() * 60;
+            message.style.left = `${left}%`;
+            
+            // 随机动画持续时间 (4-8秒)
+            const duration = 4 + Math.random() * 4;
+            message.style.animationDuration = `${duration}s`;
+            
+            document.body.appendChild(message);
+            
+            // 动画结束后移除元素
+            setTimeout(() => {
+                message.remove();
+            }, duration * 1000);
+        }
+        
+        function createParticles() {
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // 随机属性
+                const size = 4 + Math.random() * 8;
+                const color = neonColors[Math.floor(Math.random() * neonColors.length)];
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.backgroundColor = color;
+                
+                // 随机位置 (中心区域)
+                const left = 45 + Math.random() * 10;
+                const top = 45 + Math.random() * 10;
+                particle.style.left = `${left}%`;
+                particle.style.top = `${top}%`;
+                
+                // 随机飞散动画
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 30 + Math.random() * 70;
+                const duration = 1 + Math.random();
+                
+                particle.style.transition = `all ${duration}s ease-out`;
+                
+                document.body.appendChild(particle);
+                
+                // 开始动画
+                setTimeout(() => {
+                    particle.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
+                    particle.style.opacity = '0';
+                }, 10);
+                
+                // 动画结束后移除
+                setTimeout(() => {
+                    particle.remove();
+                }, duration * 1000);
+            }
+        }
+    </script>
+</body>
+</html>
